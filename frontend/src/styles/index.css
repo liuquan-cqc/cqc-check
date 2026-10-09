@@ -1,0 +1,111 @@
+/**
+ * 全局样式与设计 token
+ * 主色 #2563EB，侧边栏深蓝 #1E3A5F，内容区背景 #F5F7FA
+ */
+
+:root {
+  /* 业务设计 token */
+  --ccc-primary: #2563eb;
+  --ccc-sidebar-bg: #1e3a5f;
+  --ccc-sidebar-bg-deep: #16294a;
+  --ccc-content-bg: #f5f7fa;
+  --ccc-card-radius: 10px;
+  --ccc-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --ccc-transition: 0.2s ease;
+
+  /* Element Plus 主色覆盖（浅色） */
+  --el-color-primary: #2563eb;
+  --el-color-primary-light-3: color-mix(in srgb, var(--ccc-primary) 70%, white);
+  --el-color-primary-light-5: color-mix(in srgb, var(--ccc-primary) 50%, white);
+  --el-color-primary-light-7: color-mix(in srgb, var(--ccc-primary) 30%, white);
+  --el-color-primary-light-8: color-mix(in srgb, var(--ccc-primary) 20%, white);
+  --el-color-primary-light-9: color-mix(in srgb, var(--ccc-primary) 10%, white);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--ccc-primary) 80%, black);
+}
+
+html.dark {
+  /* 深色模式：内容区背景加深 */
+  --ccc-content-bg: #0f1722;
+  --ccc-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Source Han Sans SC', '思源黑体', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  color: var(--el-text-color-primary);
+  background-color: var(--ccc-content-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-table-density='compact'] .el-table .el-table__cell {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+html[data-table-density='comfortable'] .el-table .el-table__cell {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+html[data-table-density='spacious'] .el-table .el-table__cell {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* 通用卡片：白底、圆角、轻阴影、留白充足 */
+.ccc-card {
+  background-color: var(--el-bg-color);
+  border-radius: var(--ccc-card-radius);
+  box-shadow: var(--ccc-card-shadow);
+  padding: 20px;
+  transition: box-shadow var(--ccc-transition);
+}
+
+.ccc-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .ccc-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* 页面标题行 */
+.ccc-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.ccc-page-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

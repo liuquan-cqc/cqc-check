@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "报告同步与企业核验助手",
+  "version": "0.6.0",
+  "description": "分两步选择报告入口和文件，确认后同步单位系统报告，并在用户已登录的天眼查页面中辅助核验企业状态。",
+  "permissions": ["activeTab", "storage", "tabs", "alarms"],
+  "host_permissions": [
+    "https://certification.example/*",
+    "https://review.example.com/*",
+    "http://127.0.0.1:8080/*",
+    "http://localhost:8080/*",
+    "https://www.tianyancha.com/*"
+  ],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "service-worker.js" },
+  "action": {
+    "default_title": "报告同步助手",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://certification.example/*"],
+      "js": ["batch-parser.js", "content-script.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.tianyancha.com/*"],
+      "js": ["tianyancha-content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

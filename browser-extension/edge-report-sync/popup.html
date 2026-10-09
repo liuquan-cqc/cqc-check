@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>报告同步助手</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main>
+    <header><div class="brand">CQC</div><div><h1>报告与企业核验助手</h1><p>0.6.0 · 自动分类与独立更正版本</p></div></header>
+    <section id="pairPanel" class="panel hidden">
+      <h2>首次配对</h2>
+      <label>审核网站地址<input id="serverUrl" value="http://localhost:8080" /></label>
+      <label>设备名称<input id="deviceName" value="Parallels Win11 Edge" /></label>
+      <label>管理员配对码<input id="pairCode" maxlength="6" inputmode="numeric" placeholder="6位数字" /></label>
+      <button id="pairButton" class="primary">完成配对</button>
+    </section>
+    <section id="syncPanel" class="panel hidden">
+      <div class="connection"><span class="dot"></span><span>已连接审核网站</span><button id="editServerButton" class="text-button">修改地址</button><small id="serverLabel"></small></div>
+      <div id="serverEditor" class="server-editor hidden">
+        <label>新的审核网站地址<input id="serverEditUrl" placeholder="http://localhost:8080" /></label>
+        <div class="button-row"><button id="cancelServerButton" class="secondary">取消</button><button id="saveServerButton" class="primary">保存地址</button></div>
+      </div>
+      <div id="selectionPanel">
+        <div id="pageState" class="state">正在识别当前页面…</div>
+        <dl id="reportInfo" class="hidden"><div><dt>任务编号</dt><dd id="taskNo">-</dd></div><div><dt>申请编号</dt><dd id="applicationNo">-</dd></div></dl>
+        <div id="taskChoices" class="choice-list hidden"></div>
+        <div id="fileChoices" class="choice-list hidden"></div>
+        <button id="openButton" class="primary hidden">进入所选电子型式试验报告</button>
+        <button id="syncButton" class="primary hidden">下一步：确认上传</button>
+        <button id="refreshButton" class="secondary">重新识别当前页面</button>
+        <button id="batchButton" class="secondary">当前页批量上传 / 继续批次</button>
+      </div>
+      <div id="confirmPanel" class="confirm-panel hidden">
+        <div class="step-label">上传前确认</div>
+        <h2>请核对申请和文件</h2>
+        <dl><div><dt>申请编号</dt><dd id="confirmApplicationNo">-</dd></div><div><dt>报告入口</dt><dd id="confirmEntry">-</dd></div></dl>
+        <ul id="confirmFiles" class="confirm-files"></ul>
+        <p class="confirm-warning">只会上传上面列出的文件，未勾选的收费单或附件不会上传。</p>
+        <div class="button-row"><button id="backButton" class="secondary">返回选择</button><button id="confirmButton" class="primary">确认并上传</button></div>
+      </div>
+    </section>
+    <section id="companyPanel" class="panel company-panel hidden">
+      <div class="panel-title-row"><h2>天眼查网页辅助核验</h2><span class="safe-badge">不读取Cookie</span></div>
+      <div id="companyState" class="state">正在读取核验队列…</div>
+      <dl id="companyInfo" class="hidden"><div><dt>当前企业</dt><dd id="companyName">-</dd></div></dl>
+      <button id="companyStartButton" class="primary">开始/继续今日核验</button>
+      <button id="companyStopButton" class="secondary hidden">暂停企业核验</button>
+      <p class="company-help">遇到验证码、登录失效或次数用完会自动暂停，不会绕过网站限制。</p>
+    </section>
+    <div id="message" class="message hidden"></div>
+    <footer>不读取USB密钥、证书私钥或Cookie内容</footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      POSTGRES_DB: ccc_review
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ccc_review"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD:?Set DB_PASSWORD in .env}@db:5432/ccc_review
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../data/uploads:/app/data/uploads
+      - ../data/ocr:/app/data/ocr
+      - ../data/knowledge:/app/data/knowledge:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: ["python", "backend/worker.py"]
+    env_file:
+      - ../.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD:?Set DB_PASSWORD in .env}@db:5432/ccc_review
+    volumes:
+      - ../data/uploads:/app/data/uploads
+      - ../data/ocr:/app/data/ocr
+      - ../data/knowledge:/app/data/knowledge:ro
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

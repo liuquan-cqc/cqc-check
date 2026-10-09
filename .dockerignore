@@ -1,0 +1,29 @@
+__pycache__/
+.git/
+.github/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+.env
+!.env.example
+*.db
+*.sqlite3
+*.sqlite
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+
+# 上传与ocr数据（容器内不提交，但在docker-compose中通过volume挂载保留）
+data/uploads/*
+!data/uploads/.gitkeep
+data/ocr/*
+!data/ocr/.gitkeep
+
+# 前端依赖和本机构建产物由 Dockerfile 的前端构建阶段重新生成
+node_modules/
+dist/

@@ -1,0 +1,21 @@
+# 后端核心依赖
+fastapi>=0.110.0,<1.0.0
+uvicorn[standard]>=0.29.0,<1.0.0
+python-multipart>=0.0.9
+sqlalchemy>=2.0.0,<3.0.0
+pydantic>=2.6.0,<3.0.0
+pydantic-settings>=2.2.0
+httpx>=0.27.0
+cryptography>=42.0.0
+pymupdf>=1.23.0
+
+# PostgreSQL驱动（生产使用）
+psycopg2-binary>=2.9.9
+
+# 本地OCR（扫描件使用），可选；缺失时自动降级为调用VISION_MODEL或提示缺ocr
+# 注意：rapidocr-onnxruntime包体较大，首次安装耗时；Windows下若失败，可注释掉，依赖VISION_MODEL处理扫描件
+rapidocr-onnxruntime>=1.2.0
+
+# 其他工具
+python-dateutil>=2.8.2
+PyJWT>=2.8.0

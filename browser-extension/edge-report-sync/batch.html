@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>当前页批量报告同步</title><link rel="stylesheet" href="batch.css"></head>
+<body><main><h1>当前页批量报告同步</h1><p>扫描任务 → 开始自动处理 → 查看接收与异常结果</p>
+<p class="notice">当前页任务默认全选，可取消不处理的任务。点击“开始自动处理”后，将采集有效PDF并上传至下方网站，由文件内容自动区分三类报告、跳过收费附件、维护更正版本，不再逐份确认。未明确识别的类别列为异常。不会操作原网站审核按钮。</p>
+<p id="destination"></p><div class="actions"><button id="scan">扫描原列表页 / 新建批次</button><button id="allTasks">全选任务</button><button id="collect">仅采集（不上传）</button><button id="upload">开始自动处理 / 重试未完成</button><button id="pause">暂停（当前文件结束后）</button></div>
+<p id="status" role="status"></p><section id="issues"></section><section id="tasks"></section>
+<p>请保持本标签页打开。关闭或刷新后保留清单，不自行重启上传；再次点击自动处理可继续，服务器按同任务同类别的文件指纹去重。接收成功不代表审核通过，专项范围未确认的报告不会套用型式试验矩阵。</p></main>
+<script src="batch-parser.js"></script><script src="batch.js"></script></body></html>
